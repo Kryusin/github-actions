@@ -48,6 +48,11 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.BACKEND_SERVER_SSH_KEY }}
+          known_hosts: ${{ secrets.BACKEND_SERVER_SSH_KNOWN_HOSTS }}
+
       - run: rsync -v -e 'ssh -i ../GitHub-Actions-Key.pem' dist/index.js ${SERVER_USER}@${SERVER_IP}:~/index.js
         env:
           SERVER_USER: ${{ secrets.BACKEND_SERVER_USER }}
