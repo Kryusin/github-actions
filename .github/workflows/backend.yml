@@ -47,7 +47,7 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - run: rsync -v -e 'ssh -i ../../GitHub-Actions-Key.pem' dist/index.js ${SERVER_USER}@${SERVER_IP}:~/index.js
+      - run: rsync -v -e 'ssh -i ../GitHub-Actions-Key.pem' dist/index.js ${SERVER_USER}@${SERVER_IP}:~/index.js
         env:
           SERVER_USER: ${{ secrets.BACKEND_SERVER_USER }}
           SERVER_IP: ${{ secrets.BACKEND_SERVER_IP }}
